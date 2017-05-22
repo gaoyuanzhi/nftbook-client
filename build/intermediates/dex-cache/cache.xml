@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/MAXWELL/.android/build-cache/318c0a17735c6827e58212d4f8ad56bf7c10ba19/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="44b025e216f91da596373dc8e6ade4a694e550b8">
+        <dex dex="/Users/MAXWELL/Desktop/CS219/CS219-AR/nftBook-client/nftBook/build/intermediates/pre-dexed/debug/classes_4c39ac1b3de7e6c53cb9687c82de859da3f2be95.jar" />
+    </item>
+
+</items>

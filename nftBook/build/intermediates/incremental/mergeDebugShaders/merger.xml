@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/MAXWELL/Desktop/CS219/CS219-AR/nftBook-client/nftBook/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/MAXWELL/Desktop/CS219/CS219-AR/nftBook-client/nftBook/src/debug/shaders"/></dataSet></merger>
