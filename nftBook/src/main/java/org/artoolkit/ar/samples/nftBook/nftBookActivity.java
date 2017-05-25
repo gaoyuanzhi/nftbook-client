@@ -74,6 +74,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
+import android.util.Log;
+
 public class nftBookActivity extends Activity {
 
     private static final String TAG = "nftBook";
@@ -249,3 +258,4 @@ public class nftBookActivity extends Activity {
 		}
 	}
 }
+

@@ -1,7 +1,15 @@
 [
     {
+        "merged": "/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/res/merged/debug/drawable-hdpi/settings.png",
+        "source": "/Users/MAXWELL/.android/build-cache/d991c3fb326879ef1b358c6005c7f3a13b64ace0/output/res/drawable-hdpi/settings.png"
+    },
+    {
         "merged": "/Users/MAXWELL/Desktop/CS219/nftBookProj/C:\\Users\\tanzw\\Downloads\\ARToolKit5-bin-5.3.2-Android\\AndroidStudioProjects\\nftBookProj\\nftBook\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\icon.png",
         "source": "/Users/MAXWELL/Desktop/CS219/nftBookProj/C:\\Users\\tanzw\\Downloads\\ARToolKit5-bin-5.3.2-Android\\AndroidStudioProjects\\nftBookProj\\nftBook\\src\\main\\res\\drawable-hdpi\\icon.png"
+    },
+    {
+        "merged": "/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/res/merged/debug/drawable-hdpi/icon.png",
+        "source": "/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/src/main/res/drawable-hdpi/icon.png"
     },
     {
         "merged": "/Users/MAXWELL/Desktop/CS219/nftBookProj/nftBook/build/intermediates/res/merged/debug/drawable-hdpi/icon.png",
