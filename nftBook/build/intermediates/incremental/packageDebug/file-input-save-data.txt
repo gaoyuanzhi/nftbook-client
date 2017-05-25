@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed May 24 20:24:01 PDT 2017
+#Wed May 24 21:07:19 PDT 2017
 25.file=/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/armeabi/libc++_shared.so
 25.base=/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main
 22.set=ANDROID_RESOURCE

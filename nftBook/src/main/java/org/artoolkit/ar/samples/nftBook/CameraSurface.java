@@ -55,6 +55,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.Arrays;
+import java.lang.String;
+import java.lang.Throwable;
 
 import org.artoolkit.ar.samples.nftBook.R;
 import android.annotation.SuppressLint;
@@ -241,19 +243,18 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 				// send the message
 				while (running) {
 					if (frame_id <= frame_id_update) {
-
 						int sent_buffer_size = 0;
 						while (sent_buffer_size < message.length) {
-							int length_to_send = 1500;
+							int length_to_send = 500;
 							if (sent_buffer_size + length_to_send > message.length)
 							{
 								length_to_send = message.length - sent_buffer_size;
 							}
 
-							byte[] remaining_message = Arrays.copyOfRange(message, sent_buffer_size, sent_buffer_size + length_to_send - 1);
+							byte[] remaining_message = Arrays.copyOfRange(message, sent_buffer_size, sent_buffer_size + length_to_send);
 
 							DatagramPacket p = new DatagramPacket(remaining_message, remaining_message.length, ServerAddr, ServerPort);
-							Log.d(TAG, "message sent");
+							Log.d(TAG, "Message sent: " + Integer.toString(remaining_message.length));
 							SendSocket.send(p);
 							sent_buffer_size += length_to_send;
 						}
