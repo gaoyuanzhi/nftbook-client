@@ -57,6 +57,7 @@ import java.net.SocketException;
 import java.util.Arrays;
 import java.lang.String;
 import java.lang.Throwable;
+import java.nio.*;
 
 import org.artoolkit.ar.samples.nftBook.R;
 import android.annotation.SuppressLint;
@@ -76,8 +77,8 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 	DatagramSocket SendSocket;
 	UdpSendThread udpSendThread;
 	Boolean socket_setup = false;
-	private final static int MAXPKTSIZE = 99999;
-	private static int frame_id_update = 0;
+	private static short frame_id_update = 0;
+    private static byte[] frame;
 
     @SuppressWarnings("deprecation")
 	public CameraSurface(Context context) {
@@ -181,17 +182,25 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 	public void onPreviewFrame(byte[] data, Camera cam) {
 		
 		nftBookActivity.nativeVideoFrame(data);
-		frame_id_update ++;
+        if (frame_id_update < 32767)
+		    frame_id_update ++;
+        else
+            frame_id_update = 0;
+        frame = data;
 		if (!socket_setup) {
 			socket_setup = true;
 			try {
 				// get port and address
-				int server_port = 48010;
-				int client_port = 8888;
-				InetAddress server_addr = InetAddress.getByName("131.179.80.180");
+				//int server_port = 48010;
+                int server_port = 9999;
+				//int client_port = 8888;
+                int client_port = 10000;
+				//InetAddress server_addr = InetAddress.getByName("131.179.80.180");
+                //InetAddress server_addr = InetAddress.getByName("192.168.0.103");
+                InetAddress server_addr = InetAddress.getByName("131.179.176.34");
 
 				SendSocket = new DatagramSocket(client_port);
-				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr, data);
+				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
 				udpSendThread.start();
 			} catch (Exception e) {
 				Log.e(TAG, "exception", e);
@@ -210,14 +219,13 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		InetAddress ServerAddr;
 		boolean running = true;
 		byte[] message;
-		int frame_id = frame_id_update;
+        short frame_id = 0;
 
-		public UdpSendThread(DatagramSocket _sendsocket, int _serverport, InetAddress _serveraddr, byte[] msg) throws SocketException {
+		public UdpSendThread(DatagramSocket _sendsocket, int _serverport, InetAddress _serveraddr) throws SocketException {
 			super();
 			this.SendSocket = _sendsocket;
 			this.ServerPort = _serverport;
 			this.ServerAddr = _serveraddr;
-			this.message = msg;
 		}
 
 		@Override
@@ -239,24 +247,41 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		@Override
 		public void run() {
 			try {
-
+                int total_packet_sent = 0;
 				// send the message
 				while (running) {
+                    if (frame_id_update == 0)
+                        frame_id = 0;
+
 					if (frame_id <= frame_id_update) {
 						int sent_buffer_size = 0;
-						while (sent_buffer_size < message.length) {
-							int length_to_send = 500;
-							if (sent_buffer_size + length_to_send > message.length)
+                        byte segment_id = 0;
+						while (sent_buffer_size < frame.length) {
+							int length_to_send = 1100;
+                            byte last_segment_tag = 0;
+							if (sent_buffer_size + length_to_send > frame.length)
 							{
-								length_to_send = message.length - sent_buffer_size;
+								length_to_send = frame.length - sent_buffer_size;
+                                last_segment_tag = 1;
 							}
 
-							byte[] remaining_message = Arrays.copyOfRange(message, sent_buffer_size, sent_buffer_size + length_to_send);
+							byte[] remaining_message = Arrays.copyOfRange(frame, sent_buffer_size, sent_buffer_size + length_to_send);
+                            byte[] full_message = new byte[4+remaining_message.length];
+                            full_message[0] = (byte)(frame_id & 0xff);
+                            full_message[1] = (byte)((frame_id >> 8) & 0xff);
+                            full_message[2] =  segment_id;
+                            full_message[3] =  last_segment_tag;
 
-							DatagramPacket p = new DatagramPacket(remaining_message, remaining_message.length, ServerAddr, ServerPort);
-							Log.d(TAG, "Message sent: " + Integer.toString(remaining_message.length));
+                            byte[] metadata = {full_message[0], full_message[1]};
+                            ByteBuffer wrapped = ByteBuffer.wrap(metadata);
+                            short md = wrapped.getShort();
+                            System.arraycopy(remaining_message, 0, full_message, 4, remaining_message.length);
+							DatagramPacket p = new DatagramPacket(full_message, full_message.length, ServerAddr, ServerPort);
+                            total_packet_sent ++;
+							Log.d(TAG, "Message sent: " + Integer.toString(md));
 							SendSocket.send(p);
 							sent_buffer_size += length_to_send;
+                            segment_id ++;
 						}
 						frame_id++;
 					}
