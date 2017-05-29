@@ -53,6 +53,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.SocketException;
 import java.util.Arrays;
 import java.lang.String;
@@ -166,7 +167,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
     		}
 
     		int bufSize = capWidth * capHeight * pixelinfo.bitsPerPixel / 8; // For the default NV21 format, bitsPerPixel = 12.
-            
+			Log.e(TAG, "camera parameters: width , height" + Integer.toString(capWidth) + ", " + Integer.toString(capHeight));
             for (int i = 0; i < 5; i++) camera.addCallbackBuffer(new byte[bufSize]);
             
             camera.startPreview();
@@ -180,8 +181,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
     
 	@Override
 	public void onPreviewFrame(byte[] data, Camera cam) {
-		
-		nftBookActivity.nativeVideoFrame(data);
+
         if (frame_id_update < 32767)
 		    frame_id_update ++;
         else
@@ -192,12 +192,12 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 			try {
 				// get port and address
 				//int server_port = 48010;
-                int server_port = 9999;
+                int server_port = 10000;
 				//int client_port = 8888;
-                int client_port = 10000;
+                int client_port = 9999;
 				//InetAddress server_addr = InetAddress.getByName("131.179.80.180");
                 //InetAddress server_addr = InetAddress.getByName("192.168.0.103");
-                InetAddress server_addr = InetAddress.getByName("131.179.176.34");
+                InetAddress server_addr = InetAddress.getByName("192.168.0.7");
 
 				SendSocket = new DatagramSocket(client_port);
 				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
@@ -207,6 +207,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 				return;
 			}
 		}
+		nftBookActivity.nativeVideoFrame(data);
 
 
 		cam.addCallbackBuffer(data);
@@ -218,7 +219,6 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		int ServerPort;
 		InetAddress ServerAddr;
 		boolean running = true;
-		byte[] message;
         short frame_id = 0;
 
 		public UdpSendThread(DatagramSocket _sendsocket, int _serverport, InetAddress _serveraddr) throws SocketException {
@@ -257,7 +257,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 						int sent_buffer_size = 0;
                         byte segment_id = 0;
 						while (sent_buffer_size < frame.length) {
-							int length_to_send = 1100;
+							int length_to_send = 2048;
                             byte last_segment_tag = 0;
 							if (sent_buffer_size + length_to_send > frame.length)
 							{
@@ -278,7 +278,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
                             System.arraycopy(remaining_message, 0, full_message, 4, remaining_message.length);
 							DatagramPacket p = new DatagramPacket(full_message, full_message.length, ServerAddr, ServerPort);
                             total_packet_sent ++;
-							Log.d(TAG, "Message sent: " + Integer.toString(md));
+							//Log.d(TAG, "Message sent: " + Integer.toString(md));
 							SendSocket.send(p);
 							sent_buffer_size += length_to_send;
                             segment_id ++;
@@ -302,5 +302,59 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 			}
 		}
 	}
+
+//    private class TCPHandshakeThread extends Thread{
+//
+//        Socket SendSocket;
+//        int ServerPort;
+//        InetAddress ServerAddr;
+//        boolean running = true;
+//        short frame_id = 0;
+//
+//        public TCPHandshakeThread(Socket _sendsocket, int _serverport, InetAddress _serveraddr) throws SocketException {
+//            super();
+//            this.SendSocket = _sendsocket;
+//            this.ServerPort = _serverport;
+//            this.ServerAddr = _serveraddr;
+//        }
+//
+//        @Override
+//        protected void finalize() throws Throwable {
+//            super.finalize();
+//        }
+//
+//        public void setRunning(boolean _running){
+//            this.running = _running;
+//            closeSockets();
+//        }
+//
+//        private void closeSockets() {
+//            if (SendSocket != null) {
+//                SendSocket.close();
+//            }
+//        }
+//
+//        @Override
+//        public void run() {
+//            try {
+//                // send the message
+//
+//
+//
+//                // receiving the message
+//				while(running) {
+//					byte[] buf = new byte[32];
+//					DatagramPacket packet = new DatagramPacket(buf, buf.length);
+//					SendSocket.receive(packet);
+//					String receive_string = new String(packet.getData(), 0, packet.getLength() );
+//					Log.d(TAG, "message receive: " + receive_string);
+//				}
+//            } catch (Exception e) {
+//                Log.e(TAG, "udp thread exception", e);
+//            } finally {
+//                closeSockets();
+//            }
+//        }
+//    }
  
 }

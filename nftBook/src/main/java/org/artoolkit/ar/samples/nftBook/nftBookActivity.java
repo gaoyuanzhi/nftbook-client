@@ -100,7 +100,7 @@ public class nftBookActivity extends Activity {
     public static native boolean nativeDestroy();
     // Camera functions.
     public static native boolean nativeVideoInit(int w, int h, int cameraIndex, boolean cameraIsFrontFacing);
-    public static native void nativeVideoFrame(byte[] image);
+    public static native int nativeVideoFrame(byte[] image);
     // OpenGL functions.
     public static native void nativeSurfaceCreated();
     public static native void nativeSurfaceChanged(int w, int h);

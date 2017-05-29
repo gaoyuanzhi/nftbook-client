@@ -53,7 +53,7 @@ LOCAL_PATH := $(MY_LOCAL_PATH)
 
 # Pull ARToolKit into the build
 include $(CLEAR_VARS)
-ARTOOLKIT_DIR := $(MY_LOCAL_PATH)/../../../../../../android
+ARTOOLKIT_DIR := $(MY_LOCAL_PATH)/../../../../../../ARToolKit5-bin-5/android
 ARTOOLKIT_LIBDIR := $(call host-path, $(ARTOOLKIT_DIR)/obj/local/$(TARGET_ARCH_ABI))
 define add_artoolkit_module
 	include $(CLEAR_VARS)
@@ -107,6 +107,7 @@ LOCAL_LDLIBS += -llog -lGLESv1_CM -lz
 LOCAL_WHOLE_STATIC_LIBRARIES += ar
 LOCAL_STATIC_LIBRARIES += ar2 kpm util eden argsub_es armulti arosg aricp cpufeatures jpeg arvideo
 LOCAL_STATIC_LIBRARIES += osgdb_osg osgdb_ive osgdb_jpeg osgdb_gif gif osgdb_tiff tiff osgdb_bmp osgdb_png png osgdb_tga osgdb_freetype ft2 osgAnimation osgFX osgParticle osgPresentation osgShadow osgSim osgTerrain osgText osgVolume osgWidget osgViewer osgGA osgDB osgUtil osgdb_deprecated_osg osgdb_deprecated_osganimation osgdb_deprecated_osgfx  osgdb_deprecated_osgparticle osgdb_deprecated_osgshadow osgdb_deprecated_osgsim osgdb_deprecated_osgterrain osgdb_deprecated_osgtext osgdb_deprecated_osgviewer osgdb_deprecated_osgvolume osgdb_deprecated_osgwidget osg OpenThreads
+LOCAL_STATIC_LIBRARIES += libc++abi
 #LOCAL_SHARED_LIBRARIES += $(CURL_LIBS)
 LOCAL_STATIC_LIBRARIES += $(CURL_LIBS)
 

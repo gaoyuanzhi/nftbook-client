@@ -71,6 +71,23 @@
 #include "VirtualEnvironment.h"
 #include "osgPlugins.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <netdb.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <pthread.h>
+
+
+//#include <android/log.h>
+
+//#define  LOG_TAG    "FRAME TAG"
+
+//#define  LOGX(...)  __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, __VA_ARGS__)
+//#define  LOGY(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+
 // ============================================================================
 //	Types
 // ============================================================================
@@ -142,6 +159,7 @@ extern "C" {
 static void nativeVideoGetCparamCallback(const ARParam *cparam, void *userdata);
 static void *loadNFTDataAsync(THREAD_HANDLE_T *threadHandle);
 static int initNFT(ARParamLT *cparamLT, AR_PIXEL_FORMAT pixFormat);
+static void *receive_marker_handler(void* n);
 
 // ============================================================================
 //	Global variables
@@ -209,6 +227,19 @@ static bool gContentFlipH = false;
 // Network.
 static int gInternetState = -1;
 
+// sender client socket
+struct sockaddr_in myaddr;  /* our address */
+struct sockaddr_in remaddr; /* remote address */
+socklen_t addrlen = sizeof(myaddr);    /* length of addresses */
+socklen_t remaddrlen = sizeof(remaddr);
+int recvlen;      /* # bytes received */
+int fd;       /* our socket */
+int msgcnt = 0;     /* count # of messages we received */
+int SERVICE_PORT = 10000;
+int marker_buf_size = 28800;
+int frame_buffer_size = 115201;
+static bool thread_already_running = false;
+
 
 // ============================================================================
 //	Functions
@@ -218,6 +249,50 @@ static int gInternetState = -1;
 // Lifecycle functions.
 // See http://developer.android.com/reference/android/app/Activity.html#ActivityLifecycle
 //
+
+void *receive_marker_handler(void* thread_id)
+{
+    /* receiving UDP packets from receiver client */
+    if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+        LOGE("cannot create socket\n");
+        return 0;
+    }
+
+    /* bind the socket to any valid IP address and a specific port */
+    memset((char *)&myaddr, 0, sizeof(myaddr));
+    myaddr.sin_family = AF_INET;
+    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    myaddr.sin_port = htons(10001);
+
+    if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
+        LOGE("bind failed\n");
+        return 0;
+    }
+    else
+        LOGE("bind success\n");
+
+    while(true)
+    {
+        unsigned char buf[marker_buf_size];
+        int recvlen = recvfrom(fd, buf, marker_buf_size, 0, (struct sockaddr *)&remaddr, &remaddrlen);
+        buf[recvlen]='\0';
+
+        memcpy(&detectedPage, buf, 4);
+
+        int buf_ptr = 4;
+
+        for (int i = 0; i < 3; i ++)
+        {
+            for (int j = 0; j < 4; j ++)
+            {
+                memcpy(&trackingTrans[i][j], buf + buf_ptr, 4);
+                buf_ptr += 4;
+            }
+        }
+
+        LOGE("recved are %d, %f, %f, %f\n", detectedPage, trackingTrans[0][0], trackingTrans[0][2], trackingTrans[2][0]);
+    }
+}
 
 JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject object, jobject instanceOfAndroidContext))
 {
@@ -238,7 +313,25 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 #ifdef DEBUG
     LOGE("Marker count = %d\n", markersNFTCount);
 #endif
-    
+
+    if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+            LOGE("cannot create socket\n");
+            return 0;
+    }
+
+    /* bind the socket to any valid IP address and a specific port */
+    /*memset((char *)&myaddr, 0, sizeof(myaddr));
+    myaddr.sin_family = AF_INET;
+    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    myaddr.sin_port = htons(10001);
+
+    if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
+        LOGE("bind failed\n");
+        return 0;
+    }
+    else
+        LOGE("bind success\n");*/
+
 	return (true);
 }
 
@@ -273,7 +366,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStop(JNIEnv* env, jobject ob
     LOGI("nativeStop\n");
 #endif
     int i, j;
-    
+
 	// Can't call arglCleanup() or VirtualEnvironmentFinal() here, because nativeStop is not called on rendering thread.
 
     // NFT cleanup.
@@ -305,9 +398,9 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStop(JNIEnv* env, jobject ob
     ar2DeleteHandle(&ar2Handle);
     kpmDeleteHandle(&kpmHandle);
     arParamLTFree(&gCparamLT);
-    
+
     // OpenGL cleanup -- not done here.
-    
+
     // Video cleanup.
     if (gVideoFrame) {
         free(gVideoFrame);
@@ -564,18 +657,18 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
 {
     int i, j, k;
     jbyte* inArray;
-        
+
     if (!videoInited) {
 #ifdef DEBUG
         LOGD("nativeVideoFrame !VIDEO\n");
-#endif        
+#endif
         return; // No point in trying to track until video is inited.
     }
     if (!nftDataLoaded) {
         if (!nftDataLoadingThreadHandle || threadGetStatus(nftDataLoadingThreadHandle) < 1) {
 #ifdef DEBUG
             LOGD("nativeVideoFrame !NFTDATA\n");
-#endif        
+#endif
             return;
         } else {
             nftDataLoaded = true;
@@ -587,15 +680,15 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
         return; // Also, we won't track until the ARView has been inited.
 #ifdef DEBUG
         LOGD("nativeVideoFrame !ARVIEW\n");
-#endif        
+#endif
     }
 #ifdef DEBUG
     LOGD("nativeVideoFrame\n");
-#endif        
+#endif
     
     // Copy the incoming  YUV420 image in pinArray.
     env->GetByteArrayRegion(pinArray, 0, gVideoFrameSize, (jbyte *)gVideoFrame);
-    
+
 	// As of ARToolKit v5.0, NV21 format video frames are handled natively,
 	// and no longer require colour conversion to RGBA.
 	// If you still require RGBA format information from the video,
@@ -603,14 +696,14 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
     // color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
 
     videoFrameNeedsPixelBufferDataUpload = true; // Note that buffer needs uploading. (Upload must be done on OpenGL context's thread.)
-    
+
     // Run marker detection on frame
-    if (trackingThreadHandle) {
+    /*if (trackingThreadHandle) {
         // Perform NFT tracking.
         float            err;
         int              ret;
         int              pageNo;
-        
+
         if( detectedPage == -2 ) {
             trackingInitStart( trackingThreadHandle, gVideoFrame );
             detectedPage = -1;
@@ -650,8 +743,24 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
     } else {
         LOGE("Error: trackingThreadHandle\n");
         detectedPage = -2;
+    }*/
+
+    pthread_t receiver_thread;
+
+    if (!thread_already_running)
+    {
+        int* tid = (int*)malloc(sizeof(int));
+        if(pthread_create(&receiver_thread, NULL, receive_marker_handler, (void*)tid) < 0)
+        {
+            LOGE("could not create thread\n");
+        }
+        else
+        {
+            thread_already_running = true;
+            LOGE("thread is running\n");
+        }
     }
-    
+
     // Update markers.
     for (i = 0; i < markersNFTCount; i++) {
         markersNFT[i].validPrev = markersNFT[i].valid;
@@ -661,31 +770,31 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
         }
         else markersNFT[i].valid = FALSE;
         if (markersNFT[i].valid) {
-            
+
             // Filter the pose estimate.
             if (markersNFT[i].ftmi) {
                 if (arFilterTransMat(markersNFT[i].ftmi, markersNFT[i].trans, !markersNFT[i].validPrev) < 0) {
                     LOGE("arFilterTransMat error with marker %d.\n", i);
                 }
             }
-            
+
             if (!markersNFT[i].validPrev) {
                 // Marker has become visible, tell any dependent objects.
                 VirtualEnvironmentHandleARMarkerAppeared(i);
             }
-    
+
             // We have a new pose, so set that.
             arglCameraViewRHf(markersNFT[i].trans, markersNFT[i].pose.T, 1.0f /*VIEW_SCALEFACTOR*/);
             // Tell any dependent objects about the update.
             VirtualEnvironmentHandleARMarkerWasUpdated(i, markersNFT[i].pose);
-            
+
         } else {
-            
+
             if (markersNFT[i].validPrev) {
                 // Marker has ceased to be visible, tell any dependent objects.
                 VirtualEnvironmentHandleARMarkerDisappeared(i);
             }
-        }                    
+        }
     }
 }
 
