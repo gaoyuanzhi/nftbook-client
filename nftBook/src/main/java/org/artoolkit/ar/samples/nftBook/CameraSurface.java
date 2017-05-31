@@ -63,6 +63,7 @@ import java.nio.*;
 import org.artoolkit.ar.samples.nftBook.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.os.Build;
@@ -148,7 +149,8 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
             String[] dims = camResolution.split("x", 2);
             Camera.Parameters parameters = camera.getParameters();
             parameters.setPreviewSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
-            parameters.setPreviewFrameRate(30);
+			//parameters.setPreviewFormat(ImageFormat.YUV_420_888);
+            parameters.setPreviewFrameRate(1);
             camera.setParameters(parameters);        
             
             parameters = camera.getParameters();
@@ -186,28 +188,36 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		    frame_id_update ++;
         else
             frame_id_update = 0;
-        frame = data;
-		if (!socket_setup) {
-			socket_setup = true;
-			try {
-				// get port and address
-				//int server_port = 48010;
-                int server_port = 10000;
-				//int client_port = 8888;
-                int client_port = 9999;
-				//InetAddress server_addr = InetAddress.getByName("131.179.80.180");
-                //InetAddress server_addr = InetAddress.getByName("192.168.0.103");
-                InetAddress server_addr = InetAddress.getByName("192.168.0.7");
 
-				SendSocket = new DatagramSocket(client_port);
-				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
-				udpSendThread.start();
-			} catch (Exception e) {
-				Log.e(TAG, "exception", e);
-				return;
-			}
-		}
-		nftBookActivity.nativeVideoFrame(data);
+
+//		int[] RGB_frame = new int[320*240];
+//		YUV_NV21_TO_RGB(RGB_frame, data, 320, 240);
+//		ByteBuffer byteBuffer = ByteBuffer.allocate(RGB_frame.length * 4);
+//		IntBuffer intBuffer = byteBuffer.asIntBuffer();
+//		intBuffer.put(RGB_frame);
+//		frame = byteBuffer.array();
+//		if (!socket_setup) {
+//			socket_setup = true;
+//			try {
+//				// get port and address
+//				//int server_port = 48010;
+//                int server_port = 10000;
+//				//int client_port = 8888;
+//                int client_port = 9999;
+//				//InetAddress server_addr = InetAddress.getByName("131.179.80.180");
+//                //InetAddress server_addr = InetAddress.getByName("192.168.0.103");
+//                InetAddress server_addr = InetAddress.getByName("192.168.0.7");
+//
+//				SendSocket = new DatagramSocket(client_port);
+//				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
+//				udpSendThread.start();
+//			} catch (Exception e) {
+//				Log.e(TAG, "exception", e);
+//				return;
+//			}
+//		}
+		nftBookActivity.nativeVideoFrame(frame_id_update, data);
+		//nftBookActivity.nativeVideoFrame(data);
 
 
 		cam.addCallbackBuffer(data);
@@ -299,6 +309,35 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 				Log.e(TAG, "udp thread exception", e);
 			} finally {
 				closeSockets();
+			}
+		}
+	}
+
+	private static void YUV_NV21_TO_RGB(int[] argb, byte[] yuv, int width, int height) {
+		final int frameSize = width * height;
+
+		final int ii = 0;
+		final int ij = 0;
+		final int di = +1;
+		final int dj = +1;
+
+		int a = 0;
+		for (int i = 0, ci = ii; i < height; ++i, ci += di) {
+			for (int j = 0, cj = ij; j < width; ++j, cj += dj) {
+				int y = (0xff & ((int) yuv[ci * width + cj]));
+				int v = (0xff & ((int) yuv[frameSize + (ci >> 1) * width + (cj & ~1) + 0]));
+				int u = (0xff & ((int) yuv[frameSize + (ci >> 1) * width + (cj & ~1) + 1]));
+				y = y < 16 ? 16 : y;
+
+				int r = (int) (1.164f * (y - 16) + 1.596f * (v - 128));
+				int g = (int) (1.164f * (y - 16) - 0.813f * (v - 128) - 0.391f * (u - 128));
+				int b = (int) (1.164f * (y - 16) + 2.018f * (u - 128));
+
+				r = r < 0 ? 0 : (r > 255 ? 255 : r);
+				g = g < 0 ? 0 : (g > 255 ? 255 : g);
+				b = b < 0 ? 0 : (b > 255 ? 255 : b);
+
+				argb[a++] = 0xff000000 | (r << 16) | (g << 8) | b;
 			}
 		}
 	}

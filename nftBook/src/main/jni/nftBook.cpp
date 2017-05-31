@@ -241,7 +241,6 @@ int fd;       /* our socket */
 int send_fd;
 int SERVICE_PORT = 10000;
 int marker_buf_size = 2880;
-int frame_buffer_size = 115201;
 static bool thread_already_running = false;
 static bool sender_thread_already_running = false;
 
@@ -296,7 +295,7 @@ void *send_RGB_frame_handler(void* thread_id)
             int sent_buffer_size = 0;
             short segment_id = 0;
             while (sent_buffer_size < myRGBABufferSize) {
-                int length_to_send = 2048;
+                int length_to_send = 1048;
                 short last_segment_tag = 0;
                 if (sent_buffer_size + length_to_send > myRGBABufferSize)
                 {
@@ -373,7 +372,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 
     memset((char *)&dstaddr, 0, sizeof(dstaddr));
     dstaddr.sin_family = AF_INET;
-    dstaddr.sin_addr.s_addr = inet_addr("131.179.210.120");
+    dstaddr.sin_addr.s_addr = inet_addr("192.168.0.7");
     dstaddr.sin_port = htons(10000);
 
 	return (true);
@@ -484,7 +483,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobje
 	// you can create your own additional buffer, and then unpack the NV21
 	// frames into it in nativeVideoFrame() below.
 	// Here is where you'd allocate the buffer:
-	myRGBABufferSize = videoWidth * videoHeight * 4;
+	myRGBABufferSize = w * h * 4;
 	myRGBABuffer = (ARUint8 *)malloc(myRGBABufferSize);
 	gPixFormat = AR_PIXEL_FORMAT_NV21;
 	gVideoFrameSize = (sizeof(ARUint8)*(w*h + 2*w/2*h/2));
@@ -743,11 +742,11 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
 	// If you still require RGBA format information from the video,
     // here is where you'd do the conversion:
 
-    //color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
+    color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
 
     pthread_t sender_thread;
 
-    /*if (!sender_thread_already_running)
+    if (!sender_thread_already_running)
     {
         int* tid = (int*)malloc(sizeof(int));
         if(pthread_create(&sender_thread, NULL, send_RGB_frame_handler, (void*)tid) < 0)
@@ -759,7 +758,7 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
             sender_thread_already_running = true;
             LOGE("sender thread is running\n");
         }
-    }*/
+    }
 
     videoFrameNeedsPixelBufferDataUpload = true; // Note that buffer needs uploading. (Upload must be done on OpenGL context's thread.)
 
