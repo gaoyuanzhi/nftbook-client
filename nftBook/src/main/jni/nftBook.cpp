@@ -148,7 +148,7 @@ extern "C" {
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStop(JNIEnv* env, jobject object));
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeDestroy(JNIEnv* env, jobject object));
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobject object, jint w, jint h, jint cameraIndex, jboolean cameraIsFrontFacing));
-	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jbyteArray pinArray)) ;
+	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray)) ;
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSurfaceCreated(JNIEnv* env, jobject object));
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSurfaceChanged(JNIEnv* env, jobject object, jint w, jint h));
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeDisplayParametersChanged(JNIEnv* env, jobject object, jint orientation, jint width, jint height, jint dpi));
@@ -178,6 +178,8 @@ static int videoHeight = 0;                                         ///< Height 
 static AR_PIXEL_FORMAT gPixFormat;                                  ///< Pixel format from ARToolKit enumeration.
 static ARUint8* gVideoFrame = NULL;                                 ///< Buffer containing current video frame.
 static size_t gVideoFrameSize = 0;                                  ///< Size of buffer containing current video frame.
+static ARUint8 *myRGBABuffer = NULL;
+static size_t myRGBABufferSize = 0;
 static bool videoFrameNeedsPixelBufferDataUpload = false;
 static int gCameraIndex = 0;
 static bool gCameraIsFrontFacing = false;
@@ -230,15 +232,21 @@ static int gInternetState = -1;
 // sender client socket
 struct sockaddr_in myaddr;  /* our address */
 struct sockaddr_in remaddr; /* remote address */
+struct sockaddr_in dstaddr; /* destination address */
 socklen_t addrlen = sizeof(myaddr);    /* length of addresses */
 socklen_t remaddrlen = sizeof(remaddr);
+socklen_t dstaddrlen = sizeof(dstaddr);
 int recvlen;      /* # bytes received */
 int fd;       /* our socket */
-int msgcnt = 0;     /* count # of messages we received */
+int send_fd;
 int SERVICE_PORT = 10000;
-int marker_buf_size = 28800;
+int marker_buf_size = 2880;
 int frame_buffer_size = 115201;
 static bool thread_already_running = false;
+static bool sender_thread_already_running = false;
+
+static short frame_id_update = 0;
+static short frame_id = 0;
 
 
 // ============================================================================
@@ -252,24 +260,6 @@ static bool thread_already_running = false;
 
 void *receive_marker_handler(void* thread_id)
 {
-    /* receiving UDP packets from receiver client */
-    if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-        LOGE("cannot create socket\n");
-        return 0;
-    }
-
-    /* bind the socket to any valid IP address and a specific port */
-    memset((char *)&myaddr, 0, sizeof(myaddr));
-    myaddr.sin_family = AF_INET;
-    myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    myaddr.sin_port = htons(10001);
-
-    if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
-        LOGE("bind failed\n");
-        return 0;
-    }
-    else
-        LOGE("bind success\n");
 
     while(true)
     {
@@ -294,6 +284,48 @@ void *receive_marker_handler(void* thread_id)
     }
 }
 
+void *send_RGB_frame_handler(void* thread_id)
+{
+
+    while (true)
+    {
+        if (frame_id_update == 0)
+            frame_id = 0;
+
+        if (frame_id <= frame_id_update) {
+            int sent_buffer_size = 0;
+            short segment_id = 0;
+            while (sent_buffer_size < myRGBABufferSize) {
+                int length_to_send = 2048;
+                short last_segment_tag = 0;
+                if (sent_buffer_size + length_to_send > myRGBABufferSize)
+                {
+                    length_to_send = myRGBABufferSize - sent_buffer_size;
+                    last_segment_tag = 1;
+                }
+
+                //byte[] remaining_message = Arrays.copyOfRange(frame, sent_buffer_size, sent_buffer_size + length_to_send);
+                //byte[] full_message = new byte[4+remaining_message.length];
+                char* full_message = (char*)malloc(6+length_to_send);
+                memcpy(full_message, &frame_id, 2);
+                memcpy(full_message+2, &segment_id, 2);
+                memcpy(full_message+4, &last_segment_tag, 2);
+                memcpy(full_message+6, myRGBABuffer+sent_buffer_size, length_to_send);
+
+                if (sendto(send_fd, full_message, 6+length_to_send, 0, (struct sockaddr *)&dstaddr, sizeof(dstaddr)) < 0)
+                {
+                    LOGE("Sending markers to client failed.\n");
+                }
+
+                sent_buffer_size += length_to_send;
+                segment_id ++;
+            }
+            frame_id++;
+        }
+    }
+
+}
+
 JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject object, jobject instanceOfAndroidContext))
 {
     int err_i;
@@ -314,23 +346,35 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
     LOGE("Marker count = %d\n", markersNFTCount);
 #endif
 
+    /* receiving UDP packets from receiver client */
     if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-            LOGE("cannot create socket\n");
-            return 0;
+        LOGE("cannot create socket\n");
+        return false;
     }
 
     /* bind the socket to any valid IP address and a specific port */
-    /*memset((char *)&myaddr, 0, sizeof(myaddr));
+    memset((char *)&myaddr, 0, sizeof(myaddr));
     myaddr.sin_family = AF_INET;
     myaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     myaddr.sin_port = htons(10001);
 
     if (bind(fd, (struct sockaddr *)&myaddr, sizeof(myaddr)) < 0) {
         LOGE("bind failed\n");
-        return 0;
+        return false;
     }
     else
-        LOGE("bind success\n");*/
+        LOGE("bind success\n");
+
+    /* sending UDP packets to server client */
+    if ((send_fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
+        LOGE("cannot create socket\n");
+        return false;
+    }
+
+    memset((char *)&dstaddr, 0, sizeof(dstaddr));
+    dstaddr.sin_family = AF_INET;
+    dstaddr.sin_addr.s_addr = inet_addr("131.179.210.120");
+    dstaddr.sin_port = htons(10000);
 
 	return (true);
 }
@@ -440,7 +484,8 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobje
 	// you can create your own additional buffer, and then unpack the NV21
 	// frames into it in nativeVideoFrame() below.
 	// Here is where you'd allocate the buffer:
-	// ARUint8 *myRGBABuffer = (ARUint8 *)malloc(videoWidth * videoHeight * 4);
+	myRGBABufferSize = videoWidth * videoHeight * 4;
+	myRGBABuffer = (ARUint8 *)malloc(myRGBABufferSize);
 	gPixFormat = AR_PIXEL_FORMAT_NV21;
 	gVideoFrameSize = (sizeof(ARUint8)*(w*h + 2*w/2*h/2));
 	gVideoFrame = (ARUint8*) (malloc(gVideoFrameSize));
@@ -653,10 +698,14 @@ static void *loadNFTDataAsync(THREAD_HANDLE_T *threadHandle)
     return (NULL); // Exit this thread.
 }
 
-JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jbyteArray pinArray))
+JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray))
 {
+
     int i, j, k;
     jbyte* inArray;
+    frame_id_update = (short)frame_id_need_update;
+
+    LOGD("!!!!!!!!!!!!!!!!!\n");
 
     if (!videoInited) {
 #ifdef DEBUG
@@ -693,7 +742,24 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
 	// and no longer require colour conversion to RGBA.
 	// If you still require RGBA format information from the video,
     // here is where you'd do the conversion:
-    // color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
+
+    //color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
+
+    pthread_t sender_thread;
+
+    /*if (!sender_thread_already_running)
+    {
+        int* tid = (int*)malloc(sizeof(int));
+        if(pthread_create(&sender_thread, NULL, send_RGB_frame_handler, (void*)tid) < 0)
+        {
+            LOGE("could not create thread\n");
+        }
+        else
+        {
+            sender_thread_already_running = true;
+            LOGE("sender thread is running\n");
+        }
+    }*/
 
     videoFrameNeedsPixelBufferDataUpload = true; // Note that buffer needs uploading. (Upload must be done on OpenGL context's thread.)
 
