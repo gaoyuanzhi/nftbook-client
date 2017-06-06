@@ -145,10 +145,10 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
     	
     	if (camera != null) {
 
-    		String camResolution = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("pref_cameraResolution", getResources().getString(R.string.pref_defaultValue_cameraResolution));
+    		String camResolution = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("pref_cameraResolution", "176x144");
             String[] dims = camResolution.split("x", 2);
             Camera.Parameters parameters = camera.getParameters();
-            parameters.setPreviewSize(Integer.parseInt(dims[0]), Integer.parseInt(dims[1]));
+            parameters.setPreviewSize(176, 144);
 			//parameters.setPreviewFormat(ImageFormat.YUV_420_888);
             parameters.setPreviewFrameRate(1);
             camera.setParameters(parameters);        
@@ -170,7 +170,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 
     		int bufSize = capWidth * capHeight * pixelinfo.bitsPerPixel / 8; // For the default NV21 format, bitsPerPixel = 12.
 			Log.e(TAG, "camera parameters: width , height" + Integer.toString(capWidth) + ", " + Integer.toString(capHeight));
-            for (int i = 0; i < 5; i++) camera.addCallbackBuffer(new byte[bufSize]);
+            for (int i = 0; i < 20; i++) camera.addCallbackBuffer(new byte[bufSize]);
             
             camera.startPreview();
 

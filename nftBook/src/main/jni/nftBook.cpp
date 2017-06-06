@@ -291,20 +291,21 @@ void *send_RGB_frame_handler(void* thread_id)
         if (frame_id_update == 0)
             frame_id = 0;
 
+        LOGE("Frame id is %d, frame id update is %d\n", frame_id, frame_id_update);
+
         if (frame_id <= frame_id_update) {
             int sent_buffer_size = 0;
             short segment_id = 0;
             while (sent_buffer_size < myRGBABufferSize) {
-                int length_to_send = 1048;
+                int length_to_send = 1018;
                 short last_segment_tag = 0;
                 if (sent_buffer_size + length_to_send > myRGBABufferSize)
                 {
                     length_to_send = myRGBABufferSize - sent_buffer_size;
+                    LOGD("set last segment tag\n");
                     last_segment_tag = 1;
                 }
 
-                //byte[] remaining_message = Arrays.copyOfRange(frame, sent_buffer_size, sent_buffer_size + length_to_send);
-                //byte[] full_message = new byte[4+remaining_message.length];
                 char* full_message = (char*)malloc(6+length_to_send);
                 memcpy(full_message, &frame_id, 2);
                 memcpy(full_message+2, &segment_id, 2);
@@ -313,12 +314,13 @@ void *send_RGB_frame_handler(void* thread_id)
 
                 if (sendto(send_fd, full_message, 6+length_to_send, 0, (struct sockaddr *)&dstaddr, sizeof(dstaddr)) < 0)
                 {
-                    LOGE("Sending markers to client failed.\n");
+                    LOGE("Sending RGBA frame to server failed.\n");
                 }
 
                 sent_buffer_size += length_to_send;
                 segment_id ++;
             }
+            //free(last_segment_tag);
             frame_id++;
         }
     }
@@ -373,6 +375,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
     memset((char *)&dstaddr, 0, sizeof(dstaddr));
     dstaddr.sin_family = AF_INET;
     dstaddr.sin_addr.s_addr = inet_addr("192.168.0.7");
+    //dstaddr.sin_addr.s_addr = inet_addr("131.179.210.70");
     dstaddr.sin_port = htons(10000);
 
 	return (true);
@@ -703,8 +706,6 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
     int i, j, k;
     jbyte* inArray;
     frame_id_update = (short)frame_id_need_update;
-
-    LOGD("!!!!!!!!!!!!!!!!!\n");
 
     if (!videoInited) {
 #ifdef DEBUG
