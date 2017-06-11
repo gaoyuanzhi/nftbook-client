@@ -53,7 +53,7 @@ LOCAL_PATH := $(MY_LOCAL_PATH)
 
 # Pull ARToolKit into the build
 include $(CLEAR_VARS)
-ARTOOLKIT_DIR := $(MY_LOCAL_PATH)/../../../../../../ARToolKit5-bin-5/android
+ARTOOLKIT_DIR := /Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android
 ARTOOLKIT_LIBDIR := $(call host-path, $(ARTOOLKIT_DIR)/obj/local/$(TARGET_ARCH_ABI))
 define add_artoolkit_module
 	include $(CLEAR_VARS)

@@ -1,0 +1,65 @@
+{
+  "buildFiles": [
+    "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Android.mk",
+    "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Application.mk"
+  ],
+  "cleanCommands": [
+    "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-15 NDK_OUT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/lib clean"
+  ],
+  "libraries": {
+    "cpufeatures-release-armeabi": {
+      "buildCommand": "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-15 NDK_OUT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/lib /Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj/local/armeabi/libcpufeatures.a",
+      "toolchain": "toolchain-armeabi",
+      "abi": "armeabi",
+      "artifactName": "cpufeatures",
+      "files": [
+        {
+          "src": "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures/cpu-features.c",
+          "flags": "\"-gcc-toolchain\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi15\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-mthumb\" \"-Os\" \"-DNDEBUG\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures\" \"-DANDROID\" \"-Wall\" \"-Wextra\" \"-Werror\" \"-D__ANDROID_API__\u003d15\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
+        }
+      ],
+      "output": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj/local/armeabi/libcpufeatures.a"
+    },
+    "nftBookNative-release-armeabi": {
+      "buildCommand": "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/ndk-build NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Android.mk NDK_APPLICATION_MK\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDK_DEBUG\u003d0 APP_PLATFORM\u003dandroid-15 NDK_OUT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj NDK_LIBS_OUT\u003d/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/lib /Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj/local/armeabi/libnftBookNative.so",
+      "toolchain": "toolchain-armeabi",
+      "abi": "armeabi",
+      "artifactName": "nftBookNative",
+      "files": [
+        {
+          "src": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/ARMarkerNFT.c",
+          "flags": "\"-gcc-toolchain\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi15\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-marm\" \"-O2\" \"-DNDEBUG\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include/android\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/support/include\" \"-I/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni\" \"-DANDROID\" \"-D__ANDROID_API__\u003d15\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
+        },
+        {
+          "src": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/VirtualEnvironment.c",
+          "flags": "\"-gcc-toolchain\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi15\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-marm\" \"-O2\" \"-DNDEBUG\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include/android\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/support/include\" \"-I/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni\" \"-DANDROID\" \"-D__ANDROID_API__\u003d15\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
+        },
+        {
+          "src": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/nftBook.cpp",
+          "flags": "\"-gcc-toolchain\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi15\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-fno-exceptions\" \"-fno-rtti\" \"-marm\" \"-O2\" \"-DNDEBUG\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include/android\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/support/include\" \"-I/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni\" \"-std\u003dc++11\" \"-frtti\" \"-fexceptions\" \"-DANDROID\" \"-D__ANDROID_API__\u003d15\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-Wno-extern-c-compat\" \"--sysroot\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
+        },
+        {
+          "src": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni/trackingSub.c",
+          "flags": "\"-gcc-toolchain\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi15\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-marm\" \"-O2\" \"-DNDEBUG\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include/android\" \"-I/Users/ZhaoweiTan/Downloads/ARToolKit5-bin-5.3.2-Android/android/../include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../llvm-libc++abi/include\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/support/include\" \"-I/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/src/main/jni\" \"-DANDROID\" \"-D__ANDROID_API__\u003d15\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
+        },
+        {
+          "src": "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures/cpu-features.c",
+          "flags": "\"-gcc-toolchain\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi15\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-mthumb\" \"-Os\" \"-DNDEBUG\" \"-I/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sources/android/cpufeatures\" \"-DANDROID\" \"-Wall\" \"-Wextra\" \"-Werror\" \"-D__ANDROID_API__\u003d15\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"--sysroot\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot\" \"-isystem\" \"/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/sysroot/usr/include/arm-linux-androideabi\""
+        }
+      ],
+      "output": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/ndkBuild/release/obj/local/armeabi/libnftBookNative.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-armeabi": {
+      "cCompilerExecutable": "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+      "cppCompilerExecutable": "/Users/ZhaoweiTan/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

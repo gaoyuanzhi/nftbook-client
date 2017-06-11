@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="aRBaseLib-unspecified">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/d991c3fb326879ef1b358c6005c7f3a13b64ace0/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/d991c3fb326879ef1b358c6005c7f3a13b64ace0/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/801989dcb643483e428f238747bd0aa576cbf321/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/801989dcb643483e428f238747bd0aa576cbf321/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

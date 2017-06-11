@@ -1,4 +1,4 @@
-#Mon May 29 00:53:24 PDT 2017
-base.0=/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Sat Jun 10 17:55:04 PDT 2017
+base.0=/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
-file.0=/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.0=/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

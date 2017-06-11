@@ -49,6 +49,7 @@
 
 package org.artoolkit.ar.samples.nftBook;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -65,6 +66,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.ImageFormat;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -216,6 +219,18 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 //				return;
 //			}
 //		}
+
+		ByteArrayOutputStream jpegStream = new ByteArrayOutputStream();
+		Camera.Parameters parameters = camera.getParameters();
+		YuvImage image = new YuvImage(data, parameters.getPreviewFormat(),
+				parameters.getPreviewSize().width, parameters.getPreviewSize().height, null);
+		image.compressToJpeg(
+				new Rect(0, 0, image.getWidth(), image.getHeight()), 50,
+				jpegStream);
+		byte[] jpegData = jpegStream.toByteArray();
+		Log.d("initial image size:" + Integer.toString(data.length), TAG);
+		Log.d("compressed image size:" + Integer.toString(jpegData.length), TAG);
+
 		nftBookActivity.nativeVideoFrame(frame_id_update, data);
 		//nftBookActivity.nativeVideoFrame(data);
 

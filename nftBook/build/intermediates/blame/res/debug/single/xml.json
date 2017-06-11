@@ -1,18 +1,6 @@
 [
     {
-        "merged": "/Users/MAXWELL/Desktop/CS219/nftBookProj/nftBook/build/intermediates/res/merged/debug/xml/preferences.xml",
-        "source": "/Users/MAXWELL/.android/build-cache/95f67094d853b02c32c6fa91e9e57c0d12b4e14b/output/res/xml/preferences.xml"
-    },
-    {
-        "merged": "/Users/MAXWELL/Desktop/CS219/nftBookProj/C:\\Users\\tanzw\\Downloads\\ARToolKit5-bin-5.3.2-Android\\AndroidStudioProjects\\nftBookProj\\nftBook\\build\\intermediates\\res\\merged\\debug\\xml\\preferences.xml",
-        "source": "/Users/MAXWELL/Desktop/CS219/nftBookProj/C:\\Users\\tanzw\\Downloads\\ARToolKit5-bin-5.3.2-Android\\AndroidStudioProjects\\nftBookProj\\nftBook\\build\\intermediates\\exploded-aar\\nftBookProj\\aRBaseLib\\unspecified\\res\\xml\\preferences.xml"
-    },
-    {
-        "merged": "/Users/MAXWELL/Desktop/CS219/CS219-AR/nftBook-client/nftBook/build/intermediates/res/merged/debug/xml/preferences.xml",
-        "source": "/Users/MAXWELL/.android/build-cache/318c0a17735c6827e58212d4f8ad56bf7c10ba19/output/res/xml/preferences.xml"
-    },
-    {
-        "merged": "/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/res/merged/debug/xml/preferences.xml",
-        "source": "/Users/MAXWELL/.android/build-cache/d991c3fb326879ef1b358c6005c7f3a13b64ace0/output/res/xml/preferences.xml"
+        "merged": "/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/Users/ZhaoweiTan/.android/build-cache/801989dcb643483e428f238747bd0aa576cbf321/output/res/xml/preferences.xml"
     }
 ]

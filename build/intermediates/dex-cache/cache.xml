@@ -3,12 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/Users/MAXWELL/.android/build-cache/d991c3fb326879ef1b358c6005c7f3a13b64ace0/output/jars/classes.jar"
+        jar="/Users/ZhaoweiTan/.android/build-cache/801989dcb643483e428f238747bd0aa576cbf321/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="44b025e216f91da596373dc8e6ade4a694e550b8">
-        <dex dex="/Users/MAXWELL/Desktop/CS219/CS219-AR/nftbook-client/nftBook/build/intermediates/pre-dexed/debug/classes_51c0b7b64096dc93e6c39f93254188e130e614dc.jar" />
+        <dex dex="/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/pre-dexed/debug/classes_54ff50fd5e9846ffa663eddbe58528f507b37c53.jar" />
     </item>
 
 </items>

@@ -291,7 +291,7 @@ void *send_RGB_frame_handler(void* thread_id)
         if (frame_id_update == 0)
             frame_id = 0;
 
-        LOGE("Frame id is %d, frame id update is %d\n", frame_id, frame_id_update);
+        // LOGE("Frame id is %d, frame id update is %d\n", frame_id, frame_id_update);
 
         if (frame_id <= frame_id_update) {
             int sent_buffer_size = 0;
@@ -374,7 +374,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 
     memset((char *)&dstaddr, 0, sizeof(dstaddr));
     dstaddr.sin_family = AF_INET;
-    dstaddr.sin_addr.s_addr = inet_addr("192.168.0.7");
+    dstaddr.sin_addr.s_addr = inet_addr("192.168.0.100");
     //dstaddr.sin_addr.s_addr = inet_addr("131.179.210.70");
     dstaddr.sin_port = htons(10000);
 
