@@ -148,7 +148,7 @@ extern "C" {
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStop(JNIEnv* env, jobject object));
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeDestroy(JNIEnv* env, jobject object));
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobject object, jint w, jint h, jint cameraIndex, jboolean cameraIsFrontFacing));
-	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray)) ;
+	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray, jbyteArray jpegArray)) ;
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSurfaceCreated(JNIEnv* env, jobject object));
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSurfaceChanged(JNIEnv* env, jobject object, jint w, jint h));
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeDisplayParametersChanged(JNIEnv* env, jobject object, jint orientation, jint width, jint height, jint dpi));
@@ -750,7 +750,7 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
     env->GetByteArrayRegion(pinArray, 0, gVideoFrameSize, (jbyte *)gVideoFrame);
 
     // Copy the jpeg in jpegArray
-    myJPEGBufferSize = env->GetArrayLength (jpegarray);
+    myJPEGBufferSize = env->GetArrayLength (jpegArray);
     myJPEGBuffer = (ARUint8 *)malloc(myJPEGBufferSize);
     env->GetByteArrayRegion (jpegArray, 0, myJPEGBufferSize, (jbyte *) myJPEGBuffer);
 
