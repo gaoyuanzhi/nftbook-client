@@ -43,117 +43,8 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/nftBook/build/tmp/expandedArchives/classes.jar_dicb4eqtaxypj7of8iwmws1tz/org/artoolkit/ar/base/rendering/ARRenderer.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/nftBook/build/tmp/expandedArchives/classes.jar_dicb4eqtaxypj7of8iwmws1tz/org/artoolkit/ar/base/rendering/Cube.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/nftBook/build/tmp/expandedArchives/classes.jar_dicb4eqtaxypj7of8iwmws1tz/org/artoolkit/ar/base/rendering/RenderUtils.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/taskArtifacts/taskArtifacts.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/3.3/tasks/_nftBook_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/classes/debug/org/artoolkit/ar/samples/nftBook/CameraSurface$UdpSendThread.class" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/classes/debug/org/artoolkit/ar/samples/nftBook/CameraSurface$UdpSendThread.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/classes/debug/org/artoolkit/ar/samples/nftBook/CameraSurface.class" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/classes/debug/org/artoolkit/ar/samples/nftBook/CameraSurface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/classes/debug/org/artoolkit/ar/samples/nftBook/nftBookActivity.class" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/classes/debug/org/artoolkit/ar/samples/nftBook/nftBookActivity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/compileDebugAidl/dependency.store" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/compileDebugAidl/dependency.store" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/compileDebugAndroidTestAidl/dependency.store" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/compileDebugAndroidTestAidl/dependency.store" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/armeabi-v7a/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/armeabi-v7a/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/armeabi-v7a/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/armeabi-v7a/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/mips/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/mips/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/mips/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/mips/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/x86/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/x86/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/x86/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/jniLibs/debug/x86/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/armeabi-v7a/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/armeabi-v7a/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/armeabi-v7a/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/armeabi-v7a/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/mips/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/mips/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/mips/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/mips/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/x86/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/x86/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/x86/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main/lib/x86/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/armeabi-v7a/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/armeabi-v7a/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/armeabi-v7a/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/armeabi-v7a/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/mips/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/mips/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/mips/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/mips/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/x86/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/x86/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/x86/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/transforms/stripDebugSymbol/debug/folders/2000/1f/main/lib/x86/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/outputs/apk/nftBook-debug.apk" afterPath="$PROJECT_DIR$/nftBook/build/outputs/apk/nftBook-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/libs/armeabi-v7a/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/src/main/libs/armeabi-v7a/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/libs/armeabi-v7a/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/src/main/libs/armeabi-v7a/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/libs/mips/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/src/main/libs/mips/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/libs/mips/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/src/main/libs/mips/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/libs/x86/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/src/main/libs/x86/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/libs/x86/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/src/main/libs/x86/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/libcpufeatures.a" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/libcpufeatures.a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/cpufeatures/cpu-features.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/cpufeatures/cpu-features.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/ARMarkerNFT.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/ARMarkerNFT.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/VirtualEnvironment.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/VirtualEnvironment.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/nftBook.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/nftBook.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/trackingSub.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/trackingSub.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/libcpufeatures.a" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/libcpufeatures.a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/cpufeatures/cpu-features.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/cpufeatures/cpu-features.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/ARMarkerNFT.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/ARMarkerNFT.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/VirtualEnvironment.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/VirtualEnvironment.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/nftBook.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/nftBook.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/trackingSub.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/trackingSub.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/libc++_shared.so" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/libc++_shared.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/libcpufeatures.a" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/libcpufeatures.a" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/libnftBookNative.so" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/libnftBookNative.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/cpufeatures/cpu-features.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/cpufeatures/cpu-features.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/ARMarkerNFT.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/ARMarkerNFT.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/VirtualEnvironment.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/VirtualEnvironment.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/nftBook.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/nftBook.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/trackingSub.o" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/trackingSub.o" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/aRBaseLib_unspecified.xml" afterPath="$PROJECT_DIR$/.idea/libraries/aRBaseLib_unspecified.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build.gradle" afterPath="$PROJECT_DIR$/nftBook/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/multi/values.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/multi/values.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-hdpi.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-hdpi.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-ldpi.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-ldpi.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-mdpi.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-mdpi.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-xhdpi.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/drawable-xhdpi.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/layout.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/layout.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/menu.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/menu.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/xml.json" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/blame/res/debug/single/xml.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental-safeguard/debug/tag.txt" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental-safeguard/debug/tag.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugAndroidTestResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugAndroidTestResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugAssets/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugJniLibFolders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugResources/compile-file-map.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugResources/merger.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugResources/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugShaders/merger.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/mergeDebugShaders/merger.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/packageDebug/dex-renamer-state.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/packageDebug/file-input-save-data.txt" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/incremental/packageDebug/file-input-save-data.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/manifest/androidTest/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/intermediates/symbols/debug/R.txt" afterPath="$PROJECT_DIR$/nftBook/build/intermediates/symbols/debug/R.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/build/outputs/logs/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/nftBook/build/outputs/logs/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/nftBook.iml" afterPath="$PROJECT_DIR$/nftBook/nftBook.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/java/org/artoolkit/ar/samples/nftBook/CameraSurface.java" afterPath="$PROJECT_DIR$/nftBook/src/main/java/org/artoolkit/ar/samples/nftBook/CameraSurface.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/jni/Android.mk" afterPath="$PROJECT_DIR$/nftBook/src/main/jni/Android.mk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/jni/nftBook.cpp" afterPath="$PROJECT_DIR$/nftBook/src/main/jni/nftBook.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/cpufeatures/cpu-features.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/cpufeatures/cpu-features.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/ARMarkerNFT.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/ARMarkerNFT.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/VirtualEnvironment.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/VirtualEnvironment.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/nftBook.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/nftBook.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/trackingSub.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/armeabi-v7a/objs/nftBookNative/trackingSub.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/cpufeatures/cpu-features.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/cpufeatures/cpu-features.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/ARMarkerNFT.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/ARMarkerNFT.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/VirtualEnvironment.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/VirtualEnvironment.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/nftBook.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/nftBook.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/trackingSub.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/mips/objs/nftBookNative/trackingSub.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/cpufeatures/cpu-features.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/cpufeatures/cpu-features.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/ARMarkerNFT.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/ARMarkerNFT.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/VirtualEnvironment.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/VirtualEnvironment.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/nftBook.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/nftBook.o.d" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/trackingSub.o.d" afterPath="$PROJECT_DIR$/nftBook/src/main/obj/local/x86/objs/nftBookNative/trackingSub.o.d" />
     </list>
     <ignored path="nftbook-client.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -188,11 +79,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CameraSurface.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CameraSurface.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nftBook/src/main/java/org/artoolkit/ar/samples/nftBook/CameraSurface.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
-              <caret line="233" column="62" selection-start-line="233" selection-start-column="62" selection-end-line="233" selection-end-column="62" />
+              <caret line="233" column="68" selection-start-line="233" selection-start-column="68" selection-end-line="233" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3750#3782#0" expanded="true" />
@@ -202,11 +93,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="nftBook.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="nftBook.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nftBook/src/main/jni/nftBook.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1179">
-              <caret line="376" column="41" selection-start-line="376" selection-start-column="41" selection-end-line="376" selection-end-column="41" />
+            <state relative-caret-position="143">
+              <caret line="386" column="44" selection-start-line="386" selection-start-column="41" selection-end-line="386" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -215,7 +106,7 @@
       <file leaf-file-name="color_convert_common.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nftBook/src/main/jni/color_convert_common.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
+            <state relative-caret-position="-52">
               <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
               <folding />
             </state>
@@ -2696,7 +2587,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7392157" sideWeight="0.50642055" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.43872115" sideWeight="0.49357945" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13676731" sideWeight="0.49357945" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3285968" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3268206" sideWeight="0.49357945" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2706,7 +2597,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29662523" sideWeight="0.4927769" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24623911" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32985553" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293745" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2904,8 +2795,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nftBook/src/main/jni/color_convert_common.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
+        <state relative-caret-position="-52">
           <caret line="50" column="30" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nftBook/src/main/jni/nftBook.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="386" column="44" selection-start-line="386" selection-start-column="41" selection-end-line="386" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -2913,20 +2812,12 @@
     <entry file="file://$PROJECT_DIR$/nftBook/src/main/java/org/artoolkit/ar/samples/nftBook/CameraSurface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
-          <caret line="233" column="62" selection-start-line="233" selection-start-column="62" selection-end-line="233" selection-end-column="62" />
+          <caret line="233" column="68" selection-start-line="233" selection-start-column="68" selection-end-line="233" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3750#3782#0" expanded="true" />
             <element signature="e#5423#5455#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nftBook/src/main/jni/nftBook.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1179">
-          <caret line="376" column="41" selection-start-line="376" selection-start-column="41" selection-end-line="376" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>

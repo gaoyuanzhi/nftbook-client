@@ -179,7 +179,9 @@ static AR_PIXEL_FORMAT gPixFormat;                                  ///< Pixel f
 static ARUint8* gVideoFrame = NULL;                                 ///< Buffer containing current video frame.
 static size_t gVideoFrameSize = 0;                                  ///< Size of buffer containing current video frame.
 static ARUint8 *myRGBABuffer = NULL;
+static ARUint8 *myJPEGBuffer = NULL;
 static size_t myRGBABufferSize = 0;
+static size_t myJPEGBufferSize = 0;
 static bool videoFrameNeedsPixelBufferDataUpload = false;
 static int gCameraIndex = 0;
 static bool gCameraIsFrontFacing = false;
@@ -296,25 +298,33 @@ void *send_RGB_frame_handler(void* thread_id)
         if (frame_id <= frame_id_update) {
             int sent_buffer_size = 0;
             short segment_id = 0;
-            while (sent_buffer_size < myRGBABufferSize) {
-                int length_to_send = 1018;
+            // while (sent_buffer_size < myRGBABufferSize) {
+            while (sent_buffer_size < myJPEGBufferSize) {
+                int length_to_send = 1000;
                 short last_segment_tag = 0;
-                if (sent_buffer_size + length_to_send > myRGBABufferSize)
-                {
-                    length_to_send = myRGBABufferSize - sent_buffer_size;
+                // if (sent_buffer_size + length_to_send > myRGBABufferSize) {
+                if (sent_buffer_size + length_to_send > myJPEGBufferSize) {
+                    // length_to_send = myRGBABufferSize - sent_buffer_size;
+                    length_to_send = myJPEGBufferSize - sent_buffer_size;
                     LOGD("set last segment tag\n");
                     last_segment_tag = 1;
                 }
 
+
+                // generate header
                 char* full_message = (char*)malloc(6+length_to_send);
                 memcpy(full_message, &frame_id, 2);
                 memcpy(full_message+2, &segment_id, 2);
                 memcpy(full_message+4, &last_segment_tag, 2);
-                memcpy(full_message+6, myRGBABuffer+sent_buffer_size, length_to_send);
+
+                // copy data
+                // memcpy(full_message+6, myRGBABuffer+sent_buffer_size, length_to_send);
+                memcpy(full_message+6, myJPEGBuffer+sent_buffer_size, length_to_send);
+
 
                 if (sendto(send_fd, full_message, 6+length_to_send, 0, (struct sockaddr *)&dstaddr, sizeof(dstaddr)) < 0)
                 {
-                    LOGE("Sending RGBA frame to server failed.\n");
+                    LOGE("Sending frame to server failed.\n");
                 }
 
                 sent_buffer_size += length_to_send;
@@ -488,6 +498,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobje
 	// Here is where you'd allocate the buffer:
 	myRGBABufferSize = w * h * 4;
 	myRGBABuffer = (ARUint8 *)malloc(myRGBABufferSize);
+
 	gPixFormat = AR_PIXEL_FORMAT_NV21;
 	gVideoFrameSize = (sizeof(ARUint8)*(w*h + 2*w/2*h/2));
 	gVideoFrame = (ARUint8*) (malloc(gVideoFrameSize));
@@ -700,7 +711,7 @@ static void *loadNFTDataAsync(THREAD_HANDLE_T *threadHandle)
     return (NULL); // Exit this thread.
 }
 
-JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray))
+JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray, jbyteArray jpegArray))
 {
 
     int i, j, k;
@@ -734,16 +745,21 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
 #ifdef DEBUG
     LOGD("nativeVideoFrame\n");
 #endif
-    
+
     // Copy the incoming  YUV420 image in pinArray.
     env->GetByteArrayRegion(pinArray, 0, gVideoFrameSize, (jbyte *)gVideoFrame);
+
+    // Copy the jpeg in jpegArray
+    myJPEGBufferSize = env->GetArrayLength (jpegarray);
+    myJPEGBuffer = (ARUint8 *)malloc(myJPEGBufferSize);
+    env->GetByteArrayRegion (jpegArray, 0, myJPEGBufferSize, (jbyte *) myJPEGBuffer);
 
 	// As of ARToolKit v5.0, NV21 format video frames are handled natively,
 	// and no longer require colour conversion to RGBA.
 	// If you still require RGBA format information from the video,
     // here is where you'd do the conversion:
 
-    color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
+    // color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
 
     pthread_t sender_thread;
 

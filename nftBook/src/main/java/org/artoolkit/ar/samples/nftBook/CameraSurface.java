@@ -231,7 +231,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		Log.d("initial image size:" + Integer.toString(data.length), TAG);
 		Log.d("compressed image size:" + Integer.toString(jpegData.length), TAG);
 
-		nftBookActivity.nativeVideoFrame(frame_id_update, data);
+		nftBookActivity.nativeVideoFrame(frame_id_update, data, jpeg);
 		//nftBookActivity.nativeVideoFrame(data);
 
 
