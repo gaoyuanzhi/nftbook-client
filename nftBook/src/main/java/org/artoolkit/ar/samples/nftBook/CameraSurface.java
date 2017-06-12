@@ -84,6 +84,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 	Boolean socket_setup = false;
 	private static short frame_id_update = 0;
     private static byte[] frame;
+	private static byte[] jpegData;
 
     @SuppressWarnings("deprecation")
 	public CameraSurface(Context context) {
@@ -225,11 +226,26 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		YuvImage image = new YuvImage(data, parameters.getPreviewFormat(),
 				parameters.getPreviewSize().width, parameters.getPreviewSize().height, null);
 		image.compressToJpeg(
-				new Rect(0, 0, image.getWidth(), image.getHeight()), 50,
+				new Rect(0, 0, image.getWidth(), image.getHeight()), 100,
 				jpegStream);
-		byte[] jpegData = jpegStream.toByteArray();
-		Log.d("initial image size:" + Integer.toString(data.length), TAG);
-		Log.d("compressed image size:" + Integer.toString(jpegData.length), TAG);
+		jpegData = jpegStream.toByteArray();
+		// Log.d("Zhaowei: initial image size:" + Integer.toString(data.length) + ", compressed image size:" + Integer.toString(jpegData.length), TAG);
+
+		if (!socket_setup) {
+			socket_setup = true;
+			try {
+				// get port and address
+                int server_port = 10000;
+                int client_port = 9999;
+                InetAddress server_addr = InetAddress.getByName("192.168.0.101");
+				SendSocket = new DatagramSocket(client_port);
+				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
+				udpSendThread.start();
+			} catch (Exception e) {
+				Log.e(TAG, "exception", e);
+				return;
+			}
+		}
 
 		nftBookActivity.nativeVideoFrame(frame_id_update, data, jpegData);
 		//nftBookActivity.nativeVideoFrame(data);
@@ -272,6 +288,16 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		@Override
 		public void run() {
 			try {
+//				byte[] break_msg = new byte[4];
+//
+//				break_msg[0] = (byte) 0;
+//				break_msg[1] = (byte) 0;
+//				break_msg[2] = (byte) 0;
+//				break_msg[3] = (byte) 2;
+//				DatagramPacket break_p = new DatagramPacket(break_msg, break_msg.length, ServerAddr, ServerPort);
+//				SendSocket.send(break_p);
+
+
                 int total_packet_sent = 0;
 				// send the message
 				while (running) {
@@ -279,23 +305,24 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
                         frame_id = 0;
 
 					if (frame_id <= frame_id_update) {
+						//  Log.d(TAG, "Zhaowei: frame_id: " + Integer.toString(frame_id) + " frame_id_update: " + Integer.toString(frame_id_update));
 						int sent_buffer_size = 0;
                         byte segment_id = 0;
-						while (sent_buffer_size < frame.length) {
-							int length_to_send = 2048;
+						while (sent_buffer_size < jpegData.length) {
+							int length_to_send = 500;
                             byte last_segment_tag = 0;
-							if (sent_buffer_size + length_to_send > frame.length)
+							if (sent_buffer_size + length_to_send > jpegData.length)
 							{
-								length_to_send = frame.length - sent_buffer_size;
+								length_to_send = jpegData.length - sent_buffer_size;
                                 last_segment_tag = 1;
 							}
 
-							byte[] remaining_message = Arrays.copyOfRange(frame, sent_buffer_size, sent_buffer_size + length_to_send);
-                            byte[] full_message = new byte[4+remaining_message.length];
-                            full_message[0] = (byte)(frame_id & 0xff);
-                            full_message[1] = (byte)((frame_id >> 8) & 0xff);
-                            full_message[2] =  segment_id;
-                            full_message[3] =  last_segment_tag;
+							byte[] remaining_message = Arrays.copyOfRange(jpegData, sent_buffer_size, sent_buffer_size + length_to_send);
+                            byte[] full_message = new byte[4 + remaining_message.length];
+							full_message[0] = (byte)((frame_id >> 8) & 0xff);
+							full_message[1] = (byte)(frame_id & 0xff);
+							full_message[2] = segment_id;
+							full_message[3] = last_segment_tag;
 
                             byte[] metadata = {full_message[0], full_message[1]};
                             ByteBuffer wrapped = ByteBuffer.wrap(metadata);
@@ -304,22 +331,27 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 							DatagramPacket p = new DatagramPacket(full_message, full_message.length, ServerAddr, ServerPort);
                             total_packet_sent ++;
 							//Log.d(TAG, "Message sent: " + Integer.toString(md));
+
 							SendSocket.send(p);
 							sent_buffer_size += length_to_send;
                             segment_id ++;
 						}
-						frame_id++;
+
+						// send break packet
+//						byte[] full_message = new byte[4];
+//
+//						full_message[0] = (byte) ((frame_id >> 8) & 0xff);
+//						full_message[1] = (byte) (frame_id & 0xff);
+//						full_message[2] = (byte) 0;
+//						full_message[3] = (byte) 2;
+//						DatagramPacket p = new DatagramPacket(full_message, full_message.length, ServerAddr, ServerPort);
+//						SendSocket.send(p);
+//						Log.d(TAG, "Zhaowei: Message sent");
+
+						frame_id ++;
+
 					}
 				}
-
-				// receiving the message
-//				while(running) {
-//					byte[] buf = new byte[MAXPKTSIZE];
-//					DatagramPacket packet = new DatagramPacket(buf, buf.length);
-//					SendSocket.receive(packet);
-//					String receive_string = new String(packet.getData(), 0, packet.getLength() );
-//					Log.d(TAG, "message receive: " + receive_string);
-//				}
 			} catch (Exception e) {
 				Log.e(TAG, "udp thread exception", e);
 			} finally {
@@ -410,5 +442,5 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 //            }
 //        }
 //    }
- 
+
 }

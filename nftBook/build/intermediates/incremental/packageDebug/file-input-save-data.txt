@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Jun 11 14:24:07 PDT 2017
+#Sun Jun 11 20:32:08 PDT 2017
 25.file=/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/res/resources-debug.ap_/res/xml/preferences.xml
 25.base=/Users/ZhaoweiTan/Documents/phd/coding/nftbook-client/nftBook/build/intermediates/res/resources-debug.ap_
 22.set=ASSET
