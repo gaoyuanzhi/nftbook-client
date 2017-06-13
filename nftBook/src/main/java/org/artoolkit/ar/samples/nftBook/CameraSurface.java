@@ -120,7 +120,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
     			camera.setPreviewDisplay(holder);
     			//camera.setPreviewCallback(this);
     			camera.setPreviewCallbackWithBuffer(this); // API level 8 (Android 2.2)
-       	
+
     		} catch (IOException exception) {
         		Log.e(TAG, "Cannot set camera preview display.");
         		camera.release();
@@ -227,28 +227,28 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 		YuvImage image = new YuvImage(data, parameters.getPreviewFormat(),
 				parameters.getPreviewSize().width, parameters.getPreviewSize().height, null);
 		image.compressToJpeg(
-				new Rect(0, 0, image.getWidth(), image.getHeight()), 100,
+				new Rect(0, 0, image.getWidth(), image.getHeight()), 20,
 				jpegStream);
 		jpegData = jpegStream.toByteArray();
 		Log.d("Zhaowei: initial image size:" + Integer.toString(data.length) + ", compressed image size:" + Integer.toString(jpegData.length), TAG);
 
-		if (!socket_setup) {
-			socket_setup = true;
-			try {
-				// get port and address
-                int server_port = 10000;
-                int client_port = 9999;
-                InetAddress server_addr = InetAddress.getByName("192.168.0.101");
-				SendSocket = new DatagramSocket(client_port);
-				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
-				udpSendThread.start();
-			} catch (Exception e) {
-				Log.e(TAG, "exception", e);
-				return;
-			}
-		}
+//		if (!socket_setup) {
+//			socket_setup = true;
+//			try {
+//				// get port and address
+//                int server_port = 10000;
+//                int client_port = 9999;
+//                InetAddress server_addr = InetAddress.getByName("192.168.0.100");
+//				SendSocket = new DatagramSocket(client_port);
+//				udpSendThread = new UdpSendThread(SendSocket, server_port, server_addr);
+//				udpSendThread.start();
+//			} catch (Exception e) {
+//				Log.e(TAG, "exception", e);
+//				return;
+//			}
+//		}
 
-		nftBookActivity.nativeVideoFrame(frame_id_update, data);
+		nftBookActivity.nativeVideoFrame(frame_id_update, data, jpegData);
 		//nftBookActivity.nativeVideoFrame(data);
 
 

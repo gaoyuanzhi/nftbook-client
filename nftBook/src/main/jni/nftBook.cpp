@@ -148,7 +148,7 @@ extern "C" {
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeStop(JNIEnv* env, jobject object));
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeDestroy(JNIEnv* env, jobject object));
 	JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeVideoInit(JNIEnv* env, jobject object, jint w, jint h, jint cameraIndex, jboolean cameraIsFrontFacing));
-	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray)) ;
+	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray, jbyteArray jpegArray)) ;
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSurfaceCreated(JNIEnv* env, jobject object));
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeSurfaceChanged(JNIEnv* env, jobject object, jint w, jint h));
 	JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeDisplayParametersChanged(JNIEnv* env, jobject object, jint orientation, jint width, jint height, jint dpi));
@@ -286,8 +286,8 @@ void *receive_marker_handler(void* thread_id)
 
 void *send_RGB_frame_handler(void* thread_id)
 {
-    // while (true)
-    while (false)
+    while (true)
+    // while (false)
     {
         if (frame_id_update == 0)
             frame_id = 0;
@@ -387,7 +387,7 @@ JNIEXPORT jboolean JNICALL JNIFUNCTION_NATIVE(nativeCreate(JNIEnv* env, jobject 
 
     memset((char *)&dstaddr, 0, sizeof(dstaddr));
     dstaddr.sin_family = AF_INET;
-    dstaddr.sin_addr.s_addr = inet_addr("192.168.0.101");
+    dstaddr.sin_addr.s_addr = inet_addr("192.168.2.1");
     //dstaddr.sin_addr.s_addr = inet_addr("131.179.210.70");
     dstaddr.sin_port = htons(10000);
 
@@ -714,7 +714,7 @@ static void *loadNFTDataAsync(THREAD_HANDLE_T *threadHandle)
     return (NULL); // Exit this thread.
 }
 
-JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray))
+JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject obj, jshort frame_id_need_update, jbyteArray pinArray, jbyteArray jpegArray))
 {
 
     int i, j, k;
@@ -753,10 +753,56 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
     env->GetByteArrayRegion(pinArray, 0, gVideoFrameSize, (jbyte *)gVideoFrame);
 
     // Copy the jpeg in jpegArray
-    /*myJPEGBufferSize = env->GetArrayLength (jpegArray);
+    myJPEGBufferSize = env->GetArrayLength (jpegArray);
     myJPEGBuffer = (ARUint8 *)malloc(myJPEGBufferSize);
     LOGD("Zhaowei: new JPEG id: %d, size %d", frame_id, myJPEGBufferSize);
-    env->GetByteArrayRegion (jpegArray, 0, myJPEGBufferSize, (jbyte *) myJPEGBuffer);*/
+    env->GetByteArrayRegion (jpegArray, 0, myJPEGBufferSize, (jbyte *) myJPEGBuffer);
+
+    if (frame_id_update == 0)
+                frame_id = 0;
+
+    // LOGD("Zhaowei: Current frame_id is %d, frame_id_update is %d", frame_id, frame_id_update);
+
+    // LOGD("Zhaowei: indicator is %d", new_frame_indicator);
+    LOGD("Zhaowei: JPEG sent. Size is %d, frame_id is %d.", myJPEGBufferSize, frame_id);
+
+    int sent_buffer_size = 0;
+    short segment_id = 0;
+    // while (sent_buffer_size < myRGBABufferSize) {
+    while (sent_buffer_size < myJPEGBufferSize) {
+        int length_to_send = 1000;
+        short last_segment_tag = 0;
+        // if (sent_buffer_size + length_to_send > myRGBABufferSize) {
+        if (sent_buffer_size + length_to_send > myJPEGBufferSize) {
+            // length_to_send = myRGBABufferSize - sent_buffer_size;
+            length_to_send = myJPEGBufferSize - sent_buffer_size;
+            LOGD("set last segment tag\n");
+            last_segment_tag = 1;
+        }
+
+
+        // generate header
+        char* full_message = (char*)malloc(6+length_to_send);
+        memcpy(full_message, &frame_id, 2);
+        memcpy(full_message+2, &segment_id, 2);
+        memcpy(full_message+4, &last_segment_tag, 2);
+
+        // copy data
+        // memcpy(full_message+6, myRGBABuffer+sent_buffer_size, length_to_send);
+        memcpy(full_message+6, myJPEGBuffer+sent_buffer_size, length_to_send);
+
+
+        if (sendto(send_fd, full_message, 6+length_to_send, 0, (struct sockaddr *)&dstaddr, sizeof(dstaddr)) < 0)
+        {
+            LOGE("Sending frame to server failed.\n");
+        }
+
+        sent_buffer_size += length_to_send;
+        segment_id ++;
+    }
+
+    //free(last_segment_tag);
+    frame_id ++;
 
 	// As of ARToolKit v5.0, NV21 format video frames are handled natively,
 	// and no longer require colour conversion to RGBA.
@@ -765,9 +811,10 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
 
     // color_convert_common(gVideoFrame, gVideoFrame + videoWidth*videoHeight, videoWidth, videoHeight, myRGBABuffer);
 
-    pthread_t sender_thread;
 
-    /*if (!sender_thread_already_running)
+    /*pthread_t sender_thread;
+
+    if (!sender_thread_already_running)
     {
         int* tid = (int*)malloc(sizeof(int));
         if(pthread_create(&sender_thread, NULL, send_RGB_frame_handler, (void*)tid) < 0)
@@ -780,6 +827,8 @@ JNIEXPORT void JNICALL JNIFUNCTION_NATIVE(nativeVideoFrame(JNIEnv* env, jobject 
             LOGE("sender thread is running\n");
         }
     }*/
+
+
 
     videoFrameNeedsPixelBufferDataUpload = true; // Note that buffer needs uploading. (Upload must be done on OpenGL context's thread.)
 
