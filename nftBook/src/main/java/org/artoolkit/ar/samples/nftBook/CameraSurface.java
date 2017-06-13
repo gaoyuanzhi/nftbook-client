@@ -149,10 +149,10 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
     	
     	if (camera != null) {
 
-    		String camResolution = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("pref_cameraResolution", "176x144");
+    		String camResolution = PreferenceManager.getDefaultSharedPreferences(getContext()).getString("pref_cameraResolution", "320x240");
             String[] dims = camResolution.split("x", 2);
             Camera.Parameters parameters = camera.getParameters();
-            parameters.setPreviewSize(176, 144);
+            parameters.setPreviewSize(320, 240);
 			//parameters.setPreviewFormat(ImageFormat.YUV_420_888);
             parameters.setPreviewFrameRate(1);
             camera.setParameters(parameters);        
@@ -174,7 +174,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 
     		int bufSize = capWidth * capHeight * pixelinfo.bitsPerPixel / 8; // For the default NV21 format, bitsPerPixel = 12.
 			Log.e(TAG, "camera parameters: width , height" + Integer.toString(capWidth) + ", " + Integer.toString(capHeight));
-            for (int i = 0; i < 20; i++) camera.addCallbackBuffer(new byte[bufSize]);
+            for (int i = 0; i < 5; i++) camera.addCallbackBuffer(new byte[bufSize]);
             
             camera.startPreview();
 
@@ -223,13 +223,14 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 
 		ByteArrayOutputStream jpegStream = new ByteArrayOutputStream();
 		Camera.Parameters parameters = camera.getParameters();
+		//byte[] copy_data = Arrays.copyOf(data, data.length);
 		YuvImage image = new YuvImage(data, parameters.getPreviewFormat(),
 				parameters.getPreviewSize().width, parameters.getPreviewSize().height, null);
 		image.compressToJpeg(
 				new Rect(0, 0, image.getWidth(), image.getHeight()), 100,
 				jpegStream);
 		jpegData = jpegStream.toByteArray();
-		// Log.d("Zhaowei: initial image size:" + Integer.toString(data.length) + ", compressed image size:" + Integer.toString(jpegData.length), TAG);
+		Log.d("Zhaowei: initial image size:" + Integer.toString(data.length) + ", compressed image size:" + Integer.toString(jpegData.length), TAG);
 
 		if (!socket_setup) {
 			socket_setup = true;
@@ -247,7 +248,7 @@ public class CameraSurface extends SurfaceView implements SurfaceHolder.Callback
 			}
 		}
 
-		nftBookActivity.nativeVideoFrame(frame_id_update, data, jpegData);
+		nftBookActivity.nativeVideoFrame(frame_id_update, data);
 		//nftBookActivity.nativeVideoFrame(data);
 
 
